@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import listRoutes from "./routes/listR.js";
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 
-//app.use("/api/warehouses", warehouseRoutes);
+app.use("/lists", listRoutes);
 
 app.use((req, res) => {
   res.status(404).send("Route not found");
