@@ -13,7 +13,7 @@ export function up(knex) {
       .references("id")
       .inTable("types")
       .onDelete("CASCADE");
-    table.binary("image");
+    table.string("image").notNullable();
   });
 }
 

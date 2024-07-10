@@ -120,3 +120,7 @@ Note: This is a very basic outline and will not represent the full roadmap
 Make it so each item auto updates - ex. New season of a tv show would make the show change from completed to ongoing.
 
 Add more API's for types of lists
+
+Adding a Signon Feature
+
+Ratings
