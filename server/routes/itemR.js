@@ -15,26 +15,17 @@ const router = express.Router();
 const getAllInventories = async (req, res) => {
   try {
     const mangalist = await knex("manga").select("*");
-    const customlist = await knex.select("*").from("custom");
+    const customlist = await knex("custom").select("*");
 
-    const combinedData = {
-      mangalist,
-      customlist,
-    };
+    const combinedList = [...mangalist, ...customlist];
 
-    combinedData.mangalist.forEach((item) => {
+    combinedList.forEach((item) => {
       if (item.image) {
         item.image = item.image.toString("base64");
       }
     });
 
-    combinedData.customlist.forEach((item) => {
-      if (item.image) {
-        item.image = item.image.toString("base64");
-      }
-    });
-
-    res.status(200).json(combinedData);
+    res.status(200).json(combinedList);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ message: "Internal Server Error" });
