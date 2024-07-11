@@ -10,10 +10,29 @@ import "./MainListPage.scss";
 const API_URL = "http://localhost:8080";
 
 const MainListPage = () => {
+  // Switching between items and lists
   const [activeComponent, setActiveComponent] = useState("lists");
 
   const handleButtonClick = (component) => {
     setActiveComponent(component);
+  };
+
+  const [listData, setListData] = useState([]);
+
+  useEffect(() => {
+    const fetchListData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/lists`);
+        setListData(response.data);
+      } catch (error) {
+        console.error("Error fetching list data:", error);
+      }
+    };
+    fetchListData();
+  }, []);
+
+  const handleAdd = (newItem) => {
+    setListData([...listData, newItem]);
   };
 
   return (
@@ -33,10 +52,10 @@ const MainListPage = () => {
             All Items
           </button>
         </div>
-        <MainHeader />
+        <MainHeader handleAdd={handleAdd} />
         <div className="mainlist-page__container--list">
           {activeComponent === "lists" ? (
-            <MainListDisplay />
+            <MainListDisplay key={listData.length} listData={listData} />
           ) : (
             <MainItemDisplay />
           )}

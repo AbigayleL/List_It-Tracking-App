@@ -1,11 +1,14 @@
 import "./Header.scss";
 import logo from "../../assets/logo/list-logo-bg.png";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   return (
     <header className="header__container">
       <div className="header-logo__container">
-        <img className="logo__image" src={logo} alt="ListIt Logo" />
+        <Link to={`/`}>
+          <img className="logo__image" src={logo} alt="ListIt Logo" />
+        </Link>
       </div>
 
       <div className="user">

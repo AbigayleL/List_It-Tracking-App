@@ -33,9 +33,18 @@ function MainListDisplay() {
 
   return (
     <div className="main-list-comps">
-      {mainlist.map((item) => (
-        <MainComponents key={item.id} name={item.title} image={item.image} />
-      ))}
+      {mainlist.map(
+        (item) => (
+          console.log(item),
+          (
+            <MainComponents
+              key={item.id}
+              name={item.title}
+              image={item.image}
+            />
+          )
+        )
+      )}
     </div>
   );
 }

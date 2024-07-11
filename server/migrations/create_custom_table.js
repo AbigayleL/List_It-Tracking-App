@@ -13,7 +13,7 @@ export function up(knex) {
       .inTable("list")
       .onDelete("CASCADE");
     table.string("title").notNullable();
-    table.string("image");
+    table.string("image").notNullable();
     table.text("description");
     table.string("progress");
     table.text("notes");

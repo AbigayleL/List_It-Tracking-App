@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import MainListPage from "./pages/MainListPage/MainListPage";
+import ListPage from "./pages/ListPage/ListPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainListPage />} />
+        <Route path="/types/items/:type_id/:listId" element={<ListPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

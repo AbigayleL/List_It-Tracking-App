@@ -9,14 +9,14 @@ export async function seed(knex) {
     {
       id: 1,
       list_name: "Manga - Currently Reading",
-      type: "Manga",
-      image: "/images/manga-image.jpg",
+      type_id: 1,
+      image: "manga-image.jpg",
     },
     {
       id: 2,
       list_name: "Wattpad Read",
-      type: "Custom",
-      image: "/images/default.jpg",
+      type_id: 8,
+      image: "default.jpg",
     },
   ]);
 }

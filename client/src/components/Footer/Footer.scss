@@ -5,6 +5,8 @@
 .footer {
   background-color: $main-blue;
   color: $main-text;
+  position: fixed;
+  bottom: 0;
   padding-bottom: 4rem;
   display: flex;
   justify-content: center;

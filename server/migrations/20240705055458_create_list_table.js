@@ -4,16 +4,18 @@
  */
 
 export function up(knex) {
-  return knex.schema.createTable("list", (table) => {
-    table.increments("id").primary();
-    table.string("list_name").notNullable();
-    table
-      .integer("type_id")
-      .unsigned()
-      .references("id")
-      .inTable("types")
-      .onDelete("CASCADE");
-    table.string("image").notNullable();
+  return knex.schema.dropTableIfExists("list").then(() => {
+    return knex.schema.createTable("list", (table) => {
+      table.increments("id").primary();
+      table.string("list_name").notNullable();
+      table
+        .integer("type_id")
+        .unsigned()
+        .references("id")
+        .inTable("types")
+        .onDelete("CASCADE");
+      table.string("image").notNullable();
+    });
   });
 }
 
