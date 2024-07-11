@@ -1,0 +1,42 @@
+@import "../../styles/partials/colours";
+@import "../../styles/partials/global";
+@import "../../styles/partials/media-queries";
+
+.mainlist-page {
+  &__container {
+    position: relative;
+    padding: 1rem 1rem;
+    top: 7rem;
+    margin: auto;
+    width: calc(100% - 1rem);
+    background-color: $background;
+    border-radius: 4px;
+
+    @include tablet {
+      width: calc(100% - 3rem);
+      max-width: 63.75rem;
+    }
+  }
+
+  .filter-buttons {
+    .buttons {
+      padding: 0.5rem 1rem;
+    }
+
+    .clicked {
+      background-color: aqua;
+    }
+  }
+}
+
+.list-page {
+  display: flex;
+  justify-content: center;
+}
+
+.mainlist-page__container--list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}

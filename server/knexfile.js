@@ -8,12 +8,12 @@ export default {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     charset: "utf8",
-  },/*
-  migrations: {
-    directory: './src/db/migrations'
   },
+  migrations: {
+    directory: "./migrations", // Adjust the directory as per your project structure
+  },
+
   seeds: {
-    directory: './src/db/seeds'
-  }
-    */
+    directory: "./seeds",
+  },
 };

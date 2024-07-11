@@ -1,0 +1,18 @@
+@import "../../styles/partials/colours";
+@import "../../styles/partials/global";
+@import "../../styles/partials/media-queries";
+
+.footer {
+  background-color: $main-blue;
+  color: $main-text;
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  p {
+    text-align: center;
+  }
+}
