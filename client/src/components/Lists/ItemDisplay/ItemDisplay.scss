@@ -1,0 +1,12 @@
+@import "../../../styles/partials/colours";
+@import "../../../styles/partials/global";
+@import "../../../styles/partials/media-queries";
+
+.list-comps {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  gap: 1rem;
+}

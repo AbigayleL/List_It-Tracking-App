@@ -1,0 +1,76 @@
+@import "../../../styles/partials/colours";
+@import "../../../styles/partials/global";
+@import "../../../styles/partials/media-queries";
+
+.list-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &--search {
+    width: 100%;
+    color: $modal-background;
+    background: url("../../../assets/icons/search.svg") no-repeat right 1rem
+      center;
+    height: 2.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid $modal-background;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 16px;
+
+    @include tablet {
+      width: 30rem;
+      font-size: 0.875rem;
+      height: 2.375rem;
+      margin-left: 16px;
+    }
+
+    &::placeholder {
+      color: $modal-background;
+    }
+  }
+}
+
+.list-header-top__container {
+  display: flex;
+  justify-content: center;
+}
+
+.bubble-header {
+  display: inline-block;
+  width: auto;
+  margin-top: 1rem;
+  color: $white;
+  background-color: $secondary-purple;
+  border-radius: 20px;
+  padding: 0.5rem 3rem;
+  text-align: center;
+
+  @include tablet {
+    padding: 0.5rem 8rem;
+  }
+
+  .list-header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+}
+
+.list-header-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 6rem;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  align-items: center;
+  padding-left: 16px;
+
+  @include tablet {
+    padding-left: 16px;
+  }
+}
