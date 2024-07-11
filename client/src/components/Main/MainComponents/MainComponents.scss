@@ -3,15 +3,17 @@
 @import "../../../styles/partials/media-queries";
 
 .card {
-  max-width: 100%;
-  flex: calc(50% - 1rem);
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0.5rem;
-  height: 200px;
+  height: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
 
   &-body {
+    flex: 1;
     position: relative;
     height: 80%;
   }
@@ -24,6 +26,7 @@
   }
 
   &-image {
+    flex: 1;
     top: 0;
     left: 0;
     object-fit: contain;

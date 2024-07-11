@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ListHeaders from "../../components/Lists/ListHeaders/ListHeaders";
 import ItemDisplay from "../../components/Lists/ItemDisplay/ItemDisplay";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import EditModal from "../../components/EditModal/EditModal";
 import "./ListPage.scss";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -11,8 +12,10 @@ import { useParams, useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:8080";
 
 const ListPage = () => {
+  //This is for delete
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const { type_id, listId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +27,14 @@ const ListPage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
   };
 
   const deletemain = async () => {
@@ -38,6 +49,10 @@ const ListPage = () => {
     }
   };
 
+  const saveEdits = async (editedData) => {
+    navigate("/");
+  };
+
   useEffect(() => {
     const fetchlist = async () => {
       try {
@@ -45,9 +60,6 @@ const ListPage = () => {
 
         setlistInfo(mainListresponse.data);
         setIsLoading(false);
-        console.log(listInfo);
-        const item = listInfo[0].list_name;
-        console.log(listInfo[0].list_name);
       } catch (error) {
         console.log("Error encountered, Please try again later.");
       }
@@ -64,6 +76,15 @@ const ListPage = () => {
       <main className="list-page__container">
         <ListHeaders listInfo={listInfo} />
 
+        {isEditModalOpen && (
+          <EditModal
+            isOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            listInfo={listInfo[0]}
+            onEdit={saveEdits}
+          />
+        )}
+
         {isModalOpen && (
           <DeleteModal
             isOpen={isModalOpen}
@@ -72,6 +93,7 @@ const ListPage = () => {
             item={listInfo[0].list_name}
           />
         )}
+
         <div className="list-page__container--list">
           <ItemDisplay />
         </div>
@@ -79,7 +101,9 @@ const ListPage = () => {
           <button className="button delete" onClick={openModal}>
             Delete
           </button>
-          <button className="button">Edit</button>
+          <button className="button" onClick={openEditModal}>
+            Edit
+          </button>
         </div>
       </main>
     </div>
