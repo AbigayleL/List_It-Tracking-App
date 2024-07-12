@@ -3,18 +3,43 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import "./ItemComponents.scss";
+/*
 
-function ListComponents({ id, name, image, type_id }) {
+$green: #97b6a3;
+$red: #d36363;
+$blue: #004aad;
+$grey: #ccc;
+
+*/
+
+function ItemComponents({ id, name, image, type_id, progress }) {
+  const getBorderColor = (progress) => {
+    if (progress == "Completed") {
+      return "#97b6a3";
+    } else if (progress == "Ongoing") {
+      return "#004aad";
+    } else if (progress == "Dropped") {
+      return "#d36363";
+    } else {
+      return "#ccc";
+    }
+  };
+
   return (
-    <div className="card">
-      <div className="card-body">
-        <img className="card-image" src={image} alt={name} />
+    <Link to={`/types/item/${type_id}/${id}`} className="item-component">
+      <div
+        className="card"
+        style={{ border: `5px solid ${getBorderColor(progress)}` }}
+      >
+        <div className="card-body">
+          <img className="card-image" src={image} alt={name} />
+        </div>
+        <div className="card-name">
+          <h3>{name}</h3>
+        </div>
       </div>
-      <div className="card-name">
-        <h3>{name}</h3>
-      </div>
-    </div>
+    </Link>
   );
 }
 
-export default ListComponents;
+export default ItemComponents;
