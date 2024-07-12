@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import close from "../../assets/icons/close.svg";
-import ApiHandler from "../ApiHandler/ApiHandler";
 const API_URL = "http://localhost:8080";
 
+import "./EditModal.scss";
 const defaultImageUrl =
   "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
 
 const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
   const [listName, setListName] = useState("");
   const [image, setImage] = useState("");
-
-  const [mangaData, setMangaData] = useState(null);
 
   console.log(listInfo);
   const typeid = listInfo.type_id;
@@ -27,15 +25,12 @@ const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
     e.preventDefault();
 
     try {
-      const mangaData = await ApiHandler("Naruto");
-      setMangaData(mangaData);
       const response = await axios.put(`${API_URL}/lists/${listInfo.id}`, {
         list_name: listName,
         type_id: typeid,
         image: image,
       });
       onEdit(response.data);
-      console.log(mangaData.data);
       closeModal();
     } catch (error) {
       console.error("Error updating list:", error);

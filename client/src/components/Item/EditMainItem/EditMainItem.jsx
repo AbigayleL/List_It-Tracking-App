@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import close from "../../../assets/icons/close.svg";
 const API_URL = "http://localhost:8080";
+import "./EditMainItem.scss";
 
 const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
   const [formData, setFormData] = useState({});
@@ -65,59 +66,65 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
               value={formData.description || ""}
               onChange={handleInputChange}
             />
-
-            <label>
-              Completed
-              <select
-                value={formData.completed}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {
-                      name: "completed",
-                      value: e.target.value === "true",
-                    },
-                  })
-                }
-                required
-              >
-                <option value={true}>Yes</option>
-                <option value={false}>No</option>
-              </select>
-            </label>
-            <label>Chapters:</label>
-            <input
-              type="number"
-              name="chapters"
-              value={formData.chapters || 0}
-              onChange={handleInputChange}
-            />
-            <label>Chapters Read:</label>
-            <input
-              type="number"
-              name="chapter_read"
-              value={formData.chapter_read || 0}
-              onChange={handleInputChange}
-            />
-
-            <label>
-              Progress:
-              <select
-                value={formData.progress}
-                onChange={(e) =>
-                  handleInputChange({
-                    target: {
-                      name: "progress",
-                      value: e.target.value === "true",
-                    },
-                  })
-                }
-                required
-              >
-                <option value="Completed">Completed</option>
-                <option value="Ongoing">Ongoing</option>
-                <option value="Dropped">Dropped</option>
-              </select>
-            </label>
+            <div className="form-row">
+              <label>
+                Completed
+                <select
+                  value={formData.completed}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {
+                        name: "completed",
+                        value: e.target.value === "true",
+                      },
+                    })
+                  }
+                  required
+                >
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </label>
+              <label>
+                Chapters:
+                <input
+                  type="number"
+                  name="chapters"
+                  value={formData.chapters || 0}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-row">
+              <label>
+                Progress:
+                <select
+                  value={formData.progress}
+                  onChange={(e) =>
+                    handleInputChange({
+                      target: {
+                        name: "progress",
+                        value: e.target.value === "true",
+                      },
+                    })
+                  }
+                  required
+                >
+                  <option value="Completed">Completed</option>
+                  <option value="Ongoing">Ongoing</option>
+                  <option value="Dropped">Dropped</option>
+                </select>
+              </label>
+              <label>
+                Chapters Read:
+                <input
+                  type="number"
+                  name="chapter_read"
+                  value={formData.chapter_read || 0}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
 
             <label>Link:</label>
             <input

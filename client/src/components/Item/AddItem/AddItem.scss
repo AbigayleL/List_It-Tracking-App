@@ -85,6 +85,15 @@
           }
         }
 
+        .form-title-row {
+          display: flex;
+          justify-content: space-between;
+          label {
+            margin-right: 10px;
+            width: 50%;
+          }
+        }
+
         .form-row {
           display: flex;
           justify-content: space-between;
