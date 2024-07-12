@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import close from "../../../assets/icons/close.svg";
 import "./AddItem.scss";
+import {
+  fetchMangaDetails,
+  fetchMangaChapters,
+  fetchMangaCoverImage,
+} from "../../ApiHandler/ApiHandler";
+
 const API_URL = "http://localhost:8080";
 
+/*      
+const mangaData = await ApiHandler("Naruto");
+setMangaData(mangaData); 
+*/
 const defaultImageUrl =
   "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
 
@@ -46,6 +56,39 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
     });
   };
 
+  const handleGetData = async (e) => {
+    e.preventDefault();
+    // Ensure title is not empty before making the API call
+    if (formData.title.trim() !== "") {
+      try {
+        const { mangaid, mangadescription, title } = await fetchMangaDetails(
+          formData.title
+        );
+        const chapterCount = await fetchMangaChapters(mangaid);
+        console.log("mangaChapters:", chapterCount);
+        /*
+        const coverImageUrl = await fetchMangaCoverImage(
+          mangaid,
+          coverFilename
+        );
+*/
+        //console.log(mangaid, mangadescription, chapterCount);
+        //   console.log(mangaData.data[0].id);
+
+        setFormData({
+          ...formData,
+          title: title || "",
+          //image: mangaData.image || defaultImageUrl,
+          description: mangadescription || "",
+          chapters: chapterCount || 0,
+        });
+      } catch (error) {
+        console.error("Error fetching manga data:", error);
+        // Handle error if necessary
+      }
+    }
+  };
+
   const handleAddItem = async (e) => {
     e.preventDefault();
 
@@ -71,14 +114,20 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
       case "1": // Manga
         return (
           <>
-            <label>Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              required
-            />
+            <div className="form-title-row">
+              <label>
+                Title:
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <button onClick={handleGetData}>Get Data</button>
+            </div>
+
             <label>Image URL:</label>
             <input
               type="text"
