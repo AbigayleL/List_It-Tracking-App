@@ -3,7 +3,9 @@
 @import "../../styles/partials/media-queries";
 
 .mainlist-page {
+  min-height: 100%;
   &__container {
+    min-height: 100%;
     position: relative;
     padding: 1rem 1rem;
     top: 7rem;

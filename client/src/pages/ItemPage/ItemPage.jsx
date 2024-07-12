@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MainItem from "../../components/Item/MainItem/MainItem";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import EditMainItem from "../../components/Item/EditMainItem/EditMainItem";
 
 import "./ItemPage.scss";
 
@@ -31,6 +32,10 @@ const ItemPage = () => {
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
+  };
+
+  const saveEdits = async (editedData) => {
+    navigate(`/types/items/${type_id}/${itemInfo.main_list_id}`);
   };
 
   const deleteI = async () => {
@@ -77,6 +82,16 @@ const ItemPage = () => {
         </div>
         <MainItem key={itemInfo.main_list_id} item={itemInfo} />
         <div className="list-page__button-container">
+          {isEditModalOpen && (
+            <EditMainItem
+              isOpen={isEditModalOpen}
+              closeModal={closeEditModal}
+              itemInfo={itemInfo}
+              onEdit={saveEdits}
+              type_id={type_id}
+            />
+          )}
+
           {isDeleteModalOpen && (
             <DeleteModal
               isOpen={isDeleteModalOpen}
@@ -88,7 +103,9 @@ const ItemPage = () => {
           <button className="button delete" onClick={openDeleteModal}>
             Delete
           </button>
-          <button className="button">Edit</button>
+          <button className="button" onClick={openEditModal}>
+            Edit
+          </button>
         </div>
       </div>
     </div>

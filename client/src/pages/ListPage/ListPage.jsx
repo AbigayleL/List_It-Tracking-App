@@ -20,6 +20,7 @@ const ListPage = () => {
   const { type_id, listId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [listInfo, setlistInfo] = useState([]);
+  const [listData, setListData] = useState([]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -53,6 +54,10 @@ const ListPage = () => {
     navigate("/");
   };
 
+  const handleAdd = (newItem) => {
+    setListData([...listData, newItem]);
+  };
+
   useEffect(() => {
     const fetchlist = async () => {
       try {
@@ -74,7 +79,12 @@ const ListPage = () => {
   return (
     <div className="list-page">
       <main className="list-page__container">
-        <ListHeaders listInfo={listInfo} />
+        <ListHeaders
+          listInfo={listInfo}
+          type_id={type_id}
+          listId={listId}
+          handleAdd={handleAdd}
+        />
 
         {isEditModalOpen && (
           <EditModal
@@ -95,7 +105,7 @@ const ListPage = () => {
         )}
 
         <div className="list-page__container--list">
-          <ItemDisplay />
+          <ItemDisplay key={listData.length} listData={listData} />
         </div>
         <div className="list-page__button-container">
           <button className="button delete" onClick={openModal}>
