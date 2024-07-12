@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import close from "../../assets/icons/close.svg";
 const API_URL = "http://localhost:8080";
 
 const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
@@ -32,9 +32,12 @@ const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
     <div className="modal">
       <div className="modal-overlay" onClick={closeModal}></div>
       <div className="modal-body">
-        <button className="modal__close" onClick={closeModal}>
-          &times;
-        </button>
+        <img
+          src={close}
+          alt="Delete Icon"
+          className="modal__close"
+          onClick={closeModal}
+        />
         <div className="modal-content">
           <div className="modal-header">
             <h2>Edit List</h2>

@@ -1,0 +1,53 @@
+@import "../../styles/partials/colours";
+@import "../../styles/partials/global";
+@import "../../styles/partials/media-queries";
+
+.item-page {
+  &__container {
+    position: relative;
+    padding: 1rem 1rem;
+    top: 7rem;
+    margin: auto;
+    width: calc(100% - 1rem);
+    background-color: $background;
+    border-radius: 4px;
+
+    @include tablet {
+      width: calc(100% - 3rem);
+      max-width: 63.75rem;
+    }
+  }
+
+  &-header {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.item-page-header-top__container {
+  display: flex;
+  justify-content: center;
+}
+
+.bubble-header {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  margin-top: 1rem;
+  color: $white;
+  background-color: $secondary-purple;
+  border-radius: 20px;
+  padding: 0.5rem 3rem;
+  text-align: center;
+
+  @include tablet {
+    padding: 0.5rem 8rem;
+  }
+
+  .item-page-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+}

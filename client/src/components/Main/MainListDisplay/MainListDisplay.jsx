@@ -39,7 +39,7 @@ function MainListDisplay(props) {
           key={item.id}
           id={item.id}
           name={item.list_name}
-          image={`../../../../../server/images/${item.image}`}
+          image={item.image}
           type_id={item.type_id}
         />
       ))}
