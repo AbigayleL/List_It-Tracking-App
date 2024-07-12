@@ -80,7 +80,11 @@ const ItemPage = () => {
             </div>
           </div>
         </div>
-        <MainItem key={itemInfo.main_list_id} item={itemInfo} />
+        <MainItem
+          key={itemInfo.main_list_id}
+          item={itemInfo}
+          type_id={type_id}
+        />
         <div className="list-page__button-container">
           {isEditModalOpen && (
             <EditMainItem

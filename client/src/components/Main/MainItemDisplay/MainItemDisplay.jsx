@@ -34,15 +34,9 @@ function MainListDisplay() {
   return (
     <div className="main-list-comps">
       {mainlist.map(
-        (item) => (
+        (item, index) => (
           console.log(item),
-          (
-            <MainComponents
-              key={item.id}
-              name={item.title}
-              image={item.image}
-            />
-          )
+          (<MainComponents key={index} name={item.title} image={item.image} />)
         )
       )}
     </div>

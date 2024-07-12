@@ -1,10 +1,8 @@
 import React from "react";
-import axios from "axios";
 
 import "./DeleteModal.scss";
-import close from "../../assets/icons/close.svg";
 
-const API_URL = "http://localhost:8080";
+import close from "../../assets/icons/close.svg";
 
 const DeleteModal = ({ isOpen, closeModal, deleteItem, item }) => {
   return (

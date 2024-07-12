@@ -4,6 +4,7 @@
 
 .mainlist-page {
   min-height: 100%;
+
   &__container {
     min-height: 100%;
     position: relative;
@@ -18,27 +19,21 @@
       width: calc(100% - 3rem);
       max-width: 63.75rem;
     }
+    .filter-buttons {
+      .buttons {
+        padding: 0.5rem 1rem;
+      }
+
+      .clicked {
+        background-color: aqua;
+      }
+    }
   }
 
-  .filter-buttons {
-    .buttons {
-      padding: 0.5rem 1rem;
-    }
-
-    .clicked {
-      background-color: aqua;
-    }
+  &__container--list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
-}
-
-.list-page {
-  display: flex;
-  justify-content: center;
-}
-
-.mainlist-page__container--list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
 }

@@ -1,6 +1,6 @@
 import "./Header.scss";
 import logo from "../../assets/logo/list-logo-bg.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
