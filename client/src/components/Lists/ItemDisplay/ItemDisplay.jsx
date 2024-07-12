@@ -35,8 +35,14 @@ function ListDisplay() {
   return (
     <div className="list-comps">
       {currentlist.map((item) => (
-        // console.log(item),
-        <ItemComponents key={item.id} name={item.title} image={item.image} />
+        <ItemComponents
+          key={item.id}
+          id={item.id}
+          name={item.title}
+          image={item.image}
+          type_id={type_id}
+          progress={item.progress}
+        />
       ))}
     </div>
   );

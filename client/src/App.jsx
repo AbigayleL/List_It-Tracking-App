@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 
 import MainListPage from "./pages/MainListPage/MainListPage";
 import ListPage from "./pages/ListPage/ListPage";
+import ItemPage from "./pages/ItemPage/ItemPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainListPage />} />
         <Route path="/types/items/:type_id/:listId" element={<ListPage />} />
+        <Route path="/types/item/:type_id/:itemId" element={<ItemPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
