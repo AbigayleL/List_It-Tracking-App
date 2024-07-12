@@ -31,14 +31,14 @@ const MainItem = ({ item }) => {
           {item.chapter_read && <p>Chapters Read: {item.chapter_read}</p>}
           {item.notes && <p>Notes: {item.notes}</p>}
           {item.last_read && <p>Last Read: {item.last_read}</p>}
+          {item.link && (
+            <p>
+              <a href={item.link}>Link</a>
+            </p>
+          )}
         </div>
       </div>
       <p>{item.description}</p>
-      {item.link && (
-        <p>
-          <a href={item.link}>Link</a>
-        </p>
-      )}
     </div>
   );
 };

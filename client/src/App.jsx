@@ -16,7 +16,6 @@ function App() {
         <Route path="/types/items/:type_id/:listId" element={<ListPage />} />
         <Route path="/types/item/:type_id/:itemId" element={<ItemPage />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

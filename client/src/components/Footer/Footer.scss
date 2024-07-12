@@ -5,12 +5,12 @@
 .footer {
   background-color: $main-blue;
   color: $main-text;
-  position: fixed;
   bottom: 0;
-  padding-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+  padding: 2rem 0;
   width: 100%;
   p {
     text-align: center;

@@ -34,7 +34,7 @@ export const MainListHeader = ({ handleAdd }) => {
         />
         <div className="add-list-button">
           <button className="button" onClick={openModal}>
-            <img src={add} alt="+" />
+            <img className="add" src={add} alt="+" />
           </button>
         </div>
       </div>
