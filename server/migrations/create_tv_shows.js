@@ -18,6 +18,7 @@ export function up(knex) {
     table.text("description");
     table.boolean("completed");
     table.string("progress");
+    table.integer("episodes");
     table.integer("episodes_watched");
     table.string("location");
   });

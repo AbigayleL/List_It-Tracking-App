@@ -123,4 +123,8 @@ Add more API's for types of lists
 
 Adding a Signon Feature
 
-Ratings
+Personal Ratings
+
+In the list page, a right side modal that tells user what has been updated/ added
+
+An export to excel button

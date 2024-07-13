@@ -7,6 +7,18 @@ import AddItem from "../../Item/AddItem/AddItem";
 function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
   const navigate = useNavigate();
 
+  const getBorderColor = (type_id) => {
+    if (type_id == 1) {
+      return "#89bdc2";
+    } else if (type_id == 2) {
+      return "#fdfd96";
+    } else if (type_id == 8) {
+      return "#a289c2";
+    } else {
+      return "#ccc";
+    }
+  };
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const openAddModal = () => {
@@ -20,7 +32,10 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
   return (
     <div className="list-header">
       <div className="list-header-top__container">
-        <div className="bubble-header ">
+        <div
+          className="bubble-header "
+          style={{ backgroundColor: getBorderColor(type_id) }}
+        >
           <h1 className="list-header-title">{listInfo[0].list_name}</h1>
         </div>
       </div>
@@ -32,7 +47,6 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
           placeholder="Search..."
           name="search"
         />
-        <button className="button">filter</button>
         <div className="add-list-button">
           <button className="button" onClick={openAddModal}>
             <img src={add} alt="+" />

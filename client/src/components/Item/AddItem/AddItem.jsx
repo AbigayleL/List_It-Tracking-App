@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import close from "../../../assets/icons/close.svg";
 import "./AddItem.scss";
@@ -30,6 +30,17 @@ const getInitialFormData = (type_id) => {
         progress: "Ongoing",
         link: "",
       };
+    case "2": // TV Shoews
+      return {
+        title: "",
+        image: "",
+        description: "",
+        completed: false,
+        progress: "Ongoing",
+        episodes: 0,
+        episodes_watched: 0,
+        location: "",
+      };
     case "8": // Custom
       return {
         title: "",
@@ -43,20 +54,30 @@ const getInitialFormData = (type_id) => {
   }
 };
 
-const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
+const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
   const [formData, setFormData] = useState(getInitialFormData(type_id));
+
+  useEffect(() => {
+    console.log("Initial formData:", formData);
+  }, [formData]);
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
-    const newValue = type === "checkbox" ? e.target.checked : value;
+    let newValue = type === "checkbox" ? e.target.checked : value;
+
+    if (name === "completed") {
+      newValue = value === "true" ? true : false;
+    }
 
     setFormData({
       ...formData,
       [name]: newValue,
     });
+    console.log(`Updated formData [${name}]:`, newValue);
   };
 
-  const handleGetData = async (e) => {
+  // This is to get the manga api
+  const handleMangaGetData = async (e) => {
     e.preventDefault();
     // Ensure title is not empty before making the API call
     if (formData.title.trim() !== "") {
@@ -66,19 +87,19 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
         );
         const chapterCount = await fetchMangaChapters(mangaid);
         console.log("mangaChapters:", chapterCount);
-        /*
+
         const coverImageUrl = await fetchMangaCoverImage(
-          mangaid,
-          coverFilename
+          formData.title,
+          mangaid
         );
-*/
+        console.log("coverImageUrl:", coverImageUrl);
         //console.log(mangaid, mangadescription, chapterCount);
         //   console.log(mangaData.data[0].id);
 
         setFormData({
           ...formData,
           title: title || "",
-          //image: mangaData.image || defaultImageUrl,
+          image: coverImageUrl || defaultImageUrl,
           description: mangadescription || "",
           chapters: chapterCount || 0,
         });
@@ -125,7 +146,7 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
                   required
                 />
               </label>
-              <button onClick={handleGetData}>Get Data</button>
+              <button onClick={handleMangaGetData}>Get Data</button>
             </div>
 
             <label>Image URL:</label>
@@ -140,7 +161,7 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
                 Completed:
                 <select
                   name="completed"
-                  value={formData.completed}
+                  value={formData.completed ? "true" : "false"}
                   onChange={handleInputChange}
                   required
                 >
@@ -170,6 +191,8 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
                   <option value="Completed">Completed</option>
                   <option value="Ongoing">Ongoing</option>
                   <option value="Dropped">Dropped</option>
+                  <option value="On-Hold">On Hold</option>
+                  <option value="Planned">Planned</option>
                 </select>
               </label>
               <label>
@@ -198,6 +221,96 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
             />
           </>
         );
+      case "2": // TV Shows
+        return (
+          <>
+            <div className="form-title-row">
+              <label>
+                Title:
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+              <button>Get Data</button>
+            </div>
+
+            <label>Image URL:</label>
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleInputChange}
+            />
+            <div className="form-row">
+              <label>
+                Completed:
+                <select
+                  name="completed"
+                  value={formData.completed ? "true" : "false"}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+              </label>
+              <label>
+                Episodes:
+                <input
+                  type="number"
+                  name="episodes"
+                  value={formData.episodes}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-row">
+              <label>
+                Progress:
+                <select
+                  name="progress"
+                  value={formData.progress}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="Completed">Completed</option>
+                  <option value="Ongoing">Ongoing</option>
+                  <option value="Dropped">Dropped</option>
+                  <option value="On-Hold">On Hold</option>
+                  <option value="Planned">Planned</option>
+                </select>
+              </label>
+              <label>
+                Episodes Watched:
+                <input
+                  type="number"
+                  name="episodes_watched"
+                  value={formData.episodes_watched}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+            />
+            <label>Location:</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+            />
+          </>
+        );
+
       case "8": // Custom
         return (
           <>
@@ -233,6 +346,8 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
                 <option value="Completed">Completed</option>
                 <option value="Ongoing">Ongoing</option>
                 <option value="Dropped">Dropped</option>
+                <option value="On-Hold">On Hold</option>
+                <option value="Planned">Planned</option>
               </select>
             </label>
             <label>Notes:</label>
@@ -272,4 +387,4 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
   );
 };
 
-export default AddModal;
+export default AddItem;

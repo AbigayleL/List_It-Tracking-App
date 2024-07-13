@@ -20,5 +20,12 @@ export async function seed(knex) {
       image:
         "https://th.bing.com/th/id/R.f08ed6faf189d44f6dae890db47ed418?rik=%2bLM0a4rcDl7mhA&pid=ImgRaw&r=0",
     },
+    {
+      id: 3,
+      list_name: "TV Shows - Netflix",
+      type_id: 2,
+      image:
+        "https://th.bing.com/th/id/OIP.jBA0fAwgdtDhlcb9lBS66QHaEK?rs=1&pid=ImgDetMain",
+    },
   ]);
 }
