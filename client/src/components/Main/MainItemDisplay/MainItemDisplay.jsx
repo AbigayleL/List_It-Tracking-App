@@ -31,12 +31,21 @@ function MainListDisplay() {
     return <div>Loading...</div>;
   }
 
+  let displayOther = true;
+
   return (
     <div className="main-list-comps">
       {mainlist.map(
         (item, index) => (
           console.log(item),
-          (<MainComponents key={index} name={item.title} image={item.image} />)
+          (
+            <MainComponents
+              key={index}
+              name={item.title}
+              image={item.image}
+              disableLink={true}
+            />
+          )
         )
       )}
     </div>

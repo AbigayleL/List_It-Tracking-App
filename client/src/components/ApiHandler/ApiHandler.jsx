@@ -91,3 +91,35 @@ export async function fetchMangaCoverImage(title, mangaid) {
     throw error;
   }
 }
+
+//TV API
+
+export async function fetchTVInfo(title) {
+  try {
+    const tvInfo = await axios.get(
+      `https://api.tvmaze.com/singlesearch/shows?q=${title}`
+    );
+
+    const gettvEpisodes = await axios.get(
+      `https://api.tvmaze.com/singlesearch/shows?q=${title}&embed=episodes`
+    );
+
+    const tvName = tvInfo.data.name;
+    const tvStatus = tvInfo.data.status;
+    const tvImage = tvInfo.data.image.medium;
+    const tvDescription = tvInfo.data.summary;
+    const tvEpisodes = gettvEpisodes.data._embedded.episodes.length;
+
+    return {
+      tvInfo,
+      tvName: tvName,
+      tvStatus: tvStatus,
+      tvImage: tvImage,
+      tvDescription: tvDescription,
+      tvEpisodes: parseInt(tvEpisodes),
+    };
+  } catch (error) {
+    console.error("Error fetching TV Info", error);
+    throw error;
+  }
+}

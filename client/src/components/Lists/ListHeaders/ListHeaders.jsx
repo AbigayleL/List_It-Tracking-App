@@ -30,38 +30,43 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
   };
 
   return (
-    <div className="list-header">
-      <div className="list-header-top__container">
-        <div
-          className="bubble-header "
-          style={{ backgroundColor: getBorderColor(type_id) }}
-        >
-          <h1 className="list-header-title">{listInfo[0].list_name}</h1>
+    <div className="list">
+      <button className="button" onClick={() => navigate(-1)}>
+        Back
+      </button>
+      <div className="list-header">
+        <div className="list-header-top__container">
+          <div
+            className="bubble-header "
+            style={{ backgroundColor: getBorderColor(type_id) }}
+          >
+            <h1 className="list-header-title">{listInfo[0].list_name}</h1>
+          </div>
         </div>
-      </div>
 
-      <div className="list-header-nav">
-        <input
-          type="text"
-          className="list-header--search"
-          placeholder="Search..."
-          name="search"
-        />
-        <div className="add-list-button">
-          <button className="button" onClick={openAddModal}>
-            <img src={add} alt="+" />
-          </button>
+        <div className="list-header-nav">
+          <input
+            type="text"
+            className="list-header--search"
+            placeholder="Search..."
+            name="search"
+          />
+          <div className="add-list-button">
+            <button className="button" onClick={openAddModal}>
+              <img src={add} alt="+" />
+            </button>
+          </div>
         </div>
+        {isAddModalOpen && (
+          <AddItem
+            isOpen={isAddModalOpen}
+            closeModal={closeAddModal}
+            onAdd={handleAdd}
+            type_id={type_id}
+            listId={listId}
+          />
+        )}
       </div>
-      {isAddModalOpen && (
-        <AddItem
-          isOpen={isAddModalOpen}
-          closeModal={closeAddModal}
-          onAdd={handleAdd}
-          type_id={type_id}
-          listId={listId}
-        />
-      )}
     </div>
   );
 }
