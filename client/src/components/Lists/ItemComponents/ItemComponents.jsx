@@ -14,7 +14,7 @@ $grey: #ccc;
 
 function ItemComponents({ id, name, image, type_id, progress }) {
   const getBorderColor = (progress) => {
-    console.log(progress);
+    //console.log(progress);
     if (progress == "Completed") {
       return "#97b6a3";
     } else if (progress == "Ongoing") {

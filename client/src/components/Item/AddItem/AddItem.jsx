@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import close from "../../../assets/icons/close.svg";
 import "./AddItem.scss";
@@ -54,8 +54,12 @@ const getInitialFormData = (type_id) => {
   }
 };
 
-const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
+const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
   const [formData, setFormData] = useState(getInitialFormData(type_id));
+
+  useEffect(() => {
+    console.log("Initial formData:", formData);
+  }, [formData]);
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
@@ -69,6 +73,7 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
       ...formData,
       [name]: newValue,
     });
+    console.log(`Updated formData [${name}]:`, newValue);
   };
 
   // This is to get the manga api
@@ -382,4 +387,4 @@ const AddModal = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
   );
 };
 
-export default AddModal;
+export default AddItem;

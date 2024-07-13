@@ -14,7 +14,7 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
   }, [itemInfo]);
 
   const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value, type, checked } = e.target;
     const newValue = type === "select-one" ? e.target.value : value;
 
     setFormData({
@@ -90,7 +90,7 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
                 <input
                   type="number"
                   name="chapters"
-                  value={formData.chapters}
+                  value={formData.chapters || 0}
                   onChange={handleInputChange}
                 />
               </label>
@@ -122,7 +122,7 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
                 <input
                   type="number"
                   name="chapter_read"
-                  value={formData.chapter_read}
+                  value={formData.chapter_read || 0}
                   onChange={handleInputChange}
                 />
               </label>
@@ -186,7 +186,7 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
                 <input
                   type="number"
                   name="episodes"
-                  value={formData.episodes}
+                  value={formData.episodes || 0}
                   onChange={handleInputChange}
                 />
               </label>
@@ -219,7 +219,7 @@ const EditMainItem = ({ isOpen, closeModal, itemInfo, onEdit, type_id }) => {
                 <input
                   type="number"
                   name="episodes_watched"
-                  value={formData.episodes_watched}
+                  value={formData.episodes_watched || 0}
                   onChange={handleInputChange}
                 />
               </label>
