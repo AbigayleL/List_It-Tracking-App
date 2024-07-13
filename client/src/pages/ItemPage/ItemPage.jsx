@@ -74,6 +74,9 @@ const ItemPage = () => {
     <div className="item-page">
       <div className="item-page__container">
         <div className="item-header">
+          <button className="button" onClick={() => navigate(-1)}>
+            Back
+          </button>
           <div className="item-page-header-top__container">
             <div className="bubble-header ">
               <h1 className="item-page-title">{itemInfo.title}</h1>

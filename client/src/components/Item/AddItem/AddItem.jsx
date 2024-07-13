@@ -6,14 +6,11 @@ import {
   fetchMangaDetails,
   fetchMangaChapters,
   fetchMangaCoverImage,
+  fetchTVInfo,
 } from "../../ApiHandler/ApiHandler";
 
 const API_URL = "http://localhost:8080";
 
-/*      
-const mangaData = await ApiHandler("Naruto");
-setMangaData(mangaData); 
-*/
 const defaultImageUrl =
   "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
 
@@ -93,8 +90,6 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
           mangaid
         );
         console.log("coverImageUrl:", coverImageUrl);
-        //console.log(mangaid, mangadescription, chapterCount);
-        //   console.log(mangaData.data[0].id);
 
         setFormData({
           ...formData,
@@ -105,8 +100,40 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
         });
       } catch (error) {
         console.error("Error fetching manga data:", error);
-        // Handle error if necessary
       }
+    }
+  };
+
+  const handleTVGetData = async (e) => {
+    e.preventDefault();
+    if (formData.title.trim() !== "") {
+      try {
+        const { title, tvStatus, tvImage, tvDescription, tvEpisodes } =
+          await fetchTVInfo(formData.title);
+        let running = false;
+
+        if (tvStatus === "Ended") {
+          running = true;
+        }
+
+        setFormData({
+          ...formData,
+          image: tvImage || defaultImageUrl,
+          description: tvDescription || "",
+          episodes: tvEpisodes || 0,
+          completed: running || false,
+        });
+      } catch (error) {
+        console.error("Error fetching TV data:", error);
+      }
+
+      /*       
+      tvName: tvName,
+      tvStatus: tvStatus,
+      tvImage: tvImage,
+      tvDescription: tvDescription,
+      tvEpisodes: parseInt(tvEpisodes),
+      */
     }
   };
 
@@ -235,7 +262,7 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
                   required
                 />
               </label>
-              <button>Get Data</button>
+              <button onClick={handleTVGetData}>Get Data</button>
             </div>
 
             <label>Image URL:</label>

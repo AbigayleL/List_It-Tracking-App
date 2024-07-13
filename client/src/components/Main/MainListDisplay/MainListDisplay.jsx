@@ -32,6 +32,9 @@ function MainListDisplay(props) {
     return <div>Loading...</div>;
   }
 
+  // This is to tell what info to display on which component
+  let displayOther = false;
+
   return (
     <div className="main-list-comps">
       {mainlist.map((item) => (
@@ -41,6 +44,7 @@ function MainListDisplay(props) {
           name={item.list_name}
           image={item.image}
           type_id={item.type_id}
+          disableLink={false}
         />
       ))}
     </div>
