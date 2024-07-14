@@ -1,7 +1,4 @@
 import express from "express";
-import fs from "fs";
-import crypto from "crypto";
-import cors from "cors";
 import "dotenv/config";
 import { check, validationResult } from "express-validator";
 
@@ -15,6 +12,8 @@ const getTableNameByType = (type_id) => {
   switch (type_id) {
     case "1":
       return "manga";
+    case "2":
+      return "tv_shows";
     case "8":
       return "custom";
     default:
@@ -28,8 +27,9 @@ const getAllInventories = async (req, res) => {
   try {
     const mangalist = await knex("manga").select("*");
     const customlist = await knex("custom").select("*");
+    const tvlist = await knex("tv_shows").select("*");
 
-    const combinedList = [...mangalist, ...customlist];
+    const combinedList = [...mangalist, ...customlist, ...tvlist];
 
     combinedList.forEach((item) => {
       if (item.image) {
@@ -104,6 +104,16 @@ router.post("/items/:type_id/:listId", validateItem, async (req, res, next) => {
         link: data.link || "",
         last_updated: data.last_updated || null,
         last_read: data.last_read || null,
+      };
+    }
+    if (type_id === "2") {
+      newItem = {
+        ...newItem,
+        completed: data.completed || false,
+        episodes: data.episodes || 0,
+        episodes_watched: data.episodes_watched || 0,
+        progress: data.progress || "",
+        location: data.location || "",
       };
     }
 
@@ -185,6 +195,17 @@ router.put("/item/:type_id/:itemId", validateItem, async (req, res) => {
         progress: data.progress || "",
         link: data.link || "",
         last_updated: new Date(), // Update last_updated timestamp
+      };
+    }
+
+    if (type_id === "2") {
+      updatedItem = {
+        ...updatedItem,
+        completed: data.completed || false,
+        episodes: data.episodes || 0,
+        episodes_watched: data.episodes_watched || 0,
+        progress: data.progress || "",
+        location: data.location || "",
       };
     }
 

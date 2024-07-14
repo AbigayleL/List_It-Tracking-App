@@ -28,12 +28,13 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 400px;
     object-fit: cover;
     object-position: center;
     border-radius: 8px 8px 0 0;
 
     @include tablet {
+      max-height: 800px;
     }
   }
 }

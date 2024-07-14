@@ -3,13 +3,21 @@ import axios from "axios";
 import close from "../../assets/icons/close.svg";
 const API_URL = "http://localhost:8080";
 
+import "./EditModal.scss";
+const defaultImageUrl =
+  "https://static.vecteezy.com/system/resources/previews/004/141/669/original/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+
 const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
   const [listName, setListName] = useState("");
+  const [image, setImage] = useState("");
+
   console.log(listInfo);
   const typeid = listInfo.type_id;
+
   useEffect(() => {
     if (listInfo) {
       setListName(listInfo.list_name);
+      setImage(listInfo.image || defaultImageUrl);
     }
   }, [listInfo]);
 
@@ -20,6 +28,7 @@ const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
       const response = await axios.put(`${API_URL}/lists/${listInfo.id}`, {
         list_name: listName,
         type_id: typeid,
+        image: image,
       });
       onEdit(response.data);
       closeModal();
@@ -48,6 +57,14 @@ const EditModal = ({ isOpen, closeModal, listInfo, onEdit }) => {
               type="text"
               value={listName}
               onChange={(e) => setListName(e.target.value)}
+              required
+            />
+
+            <label>Image:</label>
+            <input
+              type="text"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
               required
             />
             <button type="submit">Update List</button>

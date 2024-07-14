@@ -5,11 +5,16 @@
 .item {
   margin-top: 1rem;
   margin-bottom: 1rem;
+
   &-top-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 1rem;
+
+    @include tablet {
+      justify-content: center;
+    }
   }
 
   &-top-container-Image {
@@ -17,6 +22,10 @@
   }
   img {
     margin-right: 1rem;
+
+    @include tablet {
+      margin-right: 4rem;
+    }
   }
   p {
     margin-top: 0.5rem;

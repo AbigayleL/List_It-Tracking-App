@@ -1,13 +1,9 @@
 @import "./media-queries";
 @import "./colours";
 
-// Define the URL as a variable
+// Font
 $typekit-url: "https://use.typekit.net/ffw7dzd.css";
-
-// Use the variable to import the stylesheet
 @import url(#{$typekit-url});
-
-//<link rel="stylesheet" href="https://use.typekit.net/ffw7dzd.css">
 
 * {
   margin: 0;

@@ -1,26 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ListHeaders from "../../components/Lists/ListHeaders/ListHeaders";
 import ItemDisplay from "../../components/Lists/ItemDisplay/ItemDisplay";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import EditModal from "../../components/EditModal/EditModal";
 import "./ListPage.scss";
-import { useParams, useNavigate } from "react-router-dom";
-
-//listInfo={listInfo} currentlist={currentlist}
 
 const API_URL = "http://localhost:8080";
 
 const ListPage = () => {
-  //This is for delete
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { type_id, listId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [listInfo, setlistInfo] = useState([]);
+  const [listData, setListData] = useState([]);
 
+  // For the delete modal
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -53,6 +52,10 @@ const ListPage = () => {
     navigate("/");
   };
 
+  const handleAdd = (newItem) => {
+    setListData([...listData, newItem]);
+  };
+
   useEffect(() => {
     const fetchlist = async () => {
       try {
@@ -74,7 +77,12 @@ const ListPage = () => {
   return (
     <div className="list-page">
       <main className="list-page__container">
-        <ListHeaders listInfo={listInfo} />
+        <ListHeaders
+          listInfo={listInfo}
+          type_id={type_id}
+          listId={listId}
+          handleAdd={handleAdd}
+        />
 
         {isEditModalOpen && (
           <EditModal
@@ -95,7 +103,7 @@ const ListPage = () => {
         )}
 
         <div className="list-page__container--list">
-          <ItemDisplay />
+          <ItemDisplay key={listData.length} listData={listData} />
         </div>
         <div className="list-page__button-container">
           <button className="button delete" onClick={openModal}>

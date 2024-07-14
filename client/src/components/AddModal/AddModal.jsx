@@ -62,6 +62,7 @@ const AddModal = ({ isOpen, closeModal, onAdd }) => {
               >
                 <option value="">Select Type</option>
                 <option value="1">Manga</option>
+                <option value="2">TV Shows</option>
                 <option value="8">Custom</option>
               </select>
             </label>

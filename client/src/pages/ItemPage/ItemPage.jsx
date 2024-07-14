@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MainItem from "../../components/Item/MainItem/MainItem";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import EditMainItem from "../../components/Item/EditMainItem/EditMainItem";
 
 import "./ItemPage.scss";
 
@@ -33,6 +34,10 @@ const ItemPage = () => {
     setIsEditModalOpen(false);
   };
 
+  const saveEdits = async (editedData) => {
+    navigate(`/types/items/${type_id}/${itemInfo.main_list_id}`);
+  };
+
   const deleteI = async () => {
     const inventoryDeleteURL = `${API_URL}/types/item/${type_id}/${itemId}`;
     try {
@@ -52,7 +57,6 @@ const ItemPage = () => {
         );
 
         setItemInfo(itemresponse.data);
-        console.log(itemresponse.data);
         setIsLoading(false);
       } catch (error) {
         console.log("Error encountered, Please try again later.");
@@ -69,6 +73,9 @@ const ItemPage = () => {
     <div className="item-page">
       <div className="item-page__container">
         <div className="item-header">
+          <button className="button" onClick={() => navigate(-1)}>
+            Back
+          </button>
           <div className="item-page-header-top__container">
             <div className="bubble-header ">
               <h1 className="item-page-title">{itemInfo.title}</h1>
@@ -77,6 +84,16 @@ const ItemPage = () => {
         </div>
         <MainItem key={itemInfo.main_list_id} item={itemInfo} />
         <div className="list-page__button-container">
+          {isEditModalOpen && (
+            <EditMainItem
+              isOpen={isEditModalOpen}
+              closeModal={closeEditModal}
+              itemInfo={itemInfo}
+              onEdit={saveEdits}
+              type_id={type_id}
+            />
+          )}
+
           {isDeleteModalOpen && (
             <DeleteModal
               isOpen={isDeleteModalOpen}
@@ -88,7 +105,9 @@ const ItemPage = () => {
           <button className="button delete" onClick={openDeleteModal}>
             Delete
           </button>
-          <button className="button">Edit</button>
+          <button className="button" onClick={openEditModal}>
+            Edit
+          </button>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import MainComponents from "../MainComponents/MainComponents";
@@ -9,7 +8,6 @@ import "./MainItemDisplay.scss";
 
 const API_URL = "http://localhost:8080";
 function MainListDisplay() {
-  const navigate = useNavigate();
   const [mainlist, setmainlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,18 +31,14 @@ function MainListDisplay() {
 
   return (
     <div className="main-list-comps">
-      {mainlist.map(
-        (item) => (
-          console.log(item),
-          (
-            <MainComponents
-              key={item.id}
-              name={item.title}
-              image={item.image}
-            />
-          )
-        )
-      )}
+      {mainlist.map((item, index) => (
+        <MainComponents
+          key={index}
+          name={item.title}
+          image={item.image}
+          disableLink={true}
+        />
+      ))}
     </div>
   );
 }

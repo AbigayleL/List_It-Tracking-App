@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import "./ItemDisplay.scss";
 
 const API_URL = "http://localhost:8080";
-function ListDisplay() {
+function ListDisplay(props) {
   const { type_id, listId } = useParams();
   const [currentlist, setcurrentlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
