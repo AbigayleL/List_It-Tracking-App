@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import MainComponents from "../MainComponents/MainComponents";
@@ -8,7 +7,6 @@ import "./MainListDisplay.scss";
 
 const API_URL = "http://localhost:8080";
 function MainListDisplay(props) {
-  const navigate = useNavigate();
   const [mainlist, setmainlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,11 +14,9 @@ function MainListDisplay(props) {
     const fetchlist = async () => {
       try {
         const listResponse = await axios.get(`${API_URL}/lists`);
-        // Set state
 
         setmainlist(listResponse.data);
         setIsLoading(false);
-        console.log(listResponse.data);
       } catch (error) {
         console.log("Error encountered, Please try again later.");
       }
@@ -31,9 +27,6 @@ function MainListDisplay(props) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
-  // This is to tell what info to display on which component
-  let displayOther = false;
 
   return (
     <div className="main-list-comps">

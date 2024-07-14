@@ -1,10 +1,10 @@
 import React from "react";
+
 import "./MainItem.scss";
 
-const MainItem = ({ item, type_id }) => {
+const MainItem = ({ item }) => {
   const progress = item.progress;
   const getBorderColor = (progress) => {
-    console.log(progress);
     if (progress == "Completed") {
       return "#97b6a3";
     } else if (progress == "Ongoing") {

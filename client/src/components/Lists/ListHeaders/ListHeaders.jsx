@@ -1,8 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "./ListHeaders.scss";
 import add from "../../../assets/icons/add.svg";
 import AddItem from "../../Item/AddItem/AddItem";
+import About from "../../About/About";
+import question from "../../../assets/icons/question.svg";
 
 function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
     if (type_id == 1) {
       return "#89bdc2";
     } else if (type_id == 2) {
-      return "#fdfd96";
+      return "#AFF8DB";
     } else if (type_id == 8) {
       return "#a289c2";
     } else {
@@ -20,6 +22,7 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
   };
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
@@ -29,11 +32,28 @@ function ListHeaders({ listInfo, type_id, listId, handleAdd }) {
     setIsAddModalOpen(false);
   };
 
+  const openAboutModal = () => {
+    setIsAboutModalOpen(true);
+  };
+
+  const closeAboutModal = () => {
+    setIsAboutModalOpen(false);
+  };
+
   return (
     <div className="list">
-      <button className="button" onClick={() => navigate(-1)}>
-        Back
-      </button>
+      <div className="button-top">
+        {isAboutModalOpen && (
+          <About isOpen={isAboutModalOpen} closeModal={closeAboutModal} />
+        )}
+        <button className="button" onClick={() => navigate(-1)}>
+          Back
+        </button>
+        <button className="button" onClick={openAboutModal}>
+          <img className="button-img" src={question} alt="About" />
+        </button>
+      </div>
+
       <div className="list-header">
         <div className="list-header-top__container">
           <div

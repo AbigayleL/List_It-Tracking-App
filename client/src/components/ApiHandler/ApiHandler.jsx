@@ -1,7 +1,8 @@
 import axios from "axios";
 
+// All the manga api functions
+
 export async function fetchMangaDetails(title) {
-  console.log(title);
   try {
     const mangaInfo = await axios.get("https://api.mangadex.org/manga", {
       params: {
@@ -92,7 +93,7 @@ export async function fetchMangaCoverImage(title, mangaid) {
   }
 }
 
-//TV API
+//TV API function
 
 export async function fetchTVInfo(title) {
   try {

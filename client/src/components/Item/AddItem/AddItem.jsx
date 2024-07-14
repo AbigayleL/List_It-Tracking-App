@@ -27,7 +27,7 @@ const getInitialFormData = (type_id) => {
         progress: "Ongoing",
         link: "",
       };
-    case "2": // TV Shoews
+    case "2": // TV Shows
       return {
         title: "",
         image: "",
@@ -54,10 +54,6 @@ const getInitialFormData = (type_id) => {
 const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
   const [formData, setFormData] = useState(getInitialFormData(type_id));
 
-  useEffect(() => {
-    console.log("Initial formData:", formData);
-  }, [formData]);
-
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
     let newValue = type === "checkbox" ? e.target.checked : value;
@@ -70,7 +66,6 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
       ...formData,
       [name]: newValue,
     });
-    console.log(`Updated formData [${name}]:`, newValue);
   };
 
   // This is to get the manga api
@@ -103,7 +98,7 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
       }
     }
   };
-
+  //TV API
   const handleTVGetData = async (e) => {
     e.preventDefault();
     if (formData.title.trim() !== "") {
@@ -126,14 +121,6 @@ const AddItem = ({ isOpen, closeModal, onAdd, type_id, listId }) => {
       } catch (error) {
         console.error("Error fetching TV data:", error);
       }
-
-      /*       
-      tvName: tvName,
-      tvStatus: tvStatus,
-      tvImage: tvImage,
-      tvDescription: tvDescription,
-      tvEpisodes: parseInt(tvEpisodes),
-      */
     }
   };
 

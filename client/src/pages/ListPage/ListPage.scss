@@ -18,16 +18,16 @@
       max-width: 63.75rem;
     }
   }
-}
 
-.list-page__container--list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
+  &__container--list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
 
-.list-page__button-container {
-  display: flex;
-  justify-content: center;
+  &__button-container {
+    display: flex;
+    justify-content: center;
+  }
 }
