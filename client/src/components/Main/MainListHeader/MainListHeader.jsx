@@ -1,12 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./MainListHeader.scss";
 import React, { useState } from "react";
 import AddModal from "../../AddModal/AddModal";
 import add from "../../../assets/icons/add.svg";
 
 export const MainListHeader = ({ handleAdd }) => {
-  const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

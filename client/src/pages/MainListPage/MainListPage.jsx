@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import MainHeader from "../../components/Main/MainListHeader/MainListHeader";
 import MainListDisplay from "../../components/Main/MainListDisplay/MainListDisplay";
 import MainItemDisplay from "../../components/Main/MainItemDisplay/MainItemDisplay";

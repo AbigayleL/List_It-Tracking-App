@@ -1,27 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ListHeaders from "../../components/Lists/ListHeaders/ListHeaders";
 import ItemDisplay from "../../components/Lists/ItemDisplay/ItemDisplay";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import EditModal from "../../components/EditModal/EditModal";
 import "./ListPage.scss";
-import { useParams, useNavigate } from "react-router-dom";
-
-//listInfo={listInfo} currentlist={currentlist}
 
 const API_URL = "http://localhost:8080";
 
 const ListPage = () => {
-  //This is for delete
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { type_id, listId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [listInfo, setlistInfo] = useState([]);
   const [listData, setListData] = useState([]);
 
+  // For the delete modal
   const openModal = () => {
     setIsModalOpen(true);
   };
